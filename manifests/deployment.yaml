@@ -35,7 +35,7 @@ metadata:
   name:  images-port
 spec:
   selector:
-    app:  image-server
+    app:  imageserver
   type:  ClusterIP
   ports:
   - name:  images-port
