@@ -1,0 +1,8 @@
+{
+    "apps": [
+      {
+        "name": "ImageServer",
+        "script": "./src/index.ts"
+      }
+    ]
+  }
