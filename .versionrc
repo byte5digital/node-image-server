@@ -1,5 +1,5 @@
 {
 "releaseCommitMessageFormat": "chore(release): {{currentTag}}",
-"compareUrlFormat": "{{host}}/byte5-projects/Producer%20Cloud/_git/pc-landing-page/branchCompare?baseVersion=GT{{previousTag}}&targetVersion=GT{{currentTag}}",
-"commitUrlFormat": "{{host}}/byte5-projects/Producer%20Cloud/_git/pc-landing-page/commit/{{hash}}"
+"compareUrlFormat": "{{host}}/byte5-projects/Producer%20Cloud/_git/pc-image-server/branchCompare?baseVersion=GT{{previousTag}}&targetVersion=GT{{currentTag}}",
+"commitUrlFormat": "{{host}}/byte5-projects/Producer%20Cloud/_git/pc-image-server/commit/{{hash}}"
 }

@@ -6,7 +6,7 @@ import fs from "fs"
 dotenv.config()
 
 export const app = express()
-export async function resizeImageAnMakeWebP(imageFile, width) {
+export async function resizeImageAnMakeWebP(imageFile: string, width: any) {
 	return sharp(`./images/${imageFile}`).webp().resize(width)
 }
 
