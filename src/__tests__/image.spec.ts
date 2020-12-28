@@ -14,6 +14,13 @@ describe("check the image processing", () => {
 			.send()
 		expect(result.status).toBe(200)
 	})
+
+	it("should process the image with the given query param when integer", async () => {
+		const result = await request(app)
+			.get("/bg-holding-page-dark.png?width=800")
+			.send()
+		expect(result.status).toBe(200)
+	})
 	it("the image should have the given size", async () => {
 		const result = await resizeImageAnMakeWebP("bg-holding-page-dark.png", 800)
 		const dimension = imageSize(await result.toBuffer())
