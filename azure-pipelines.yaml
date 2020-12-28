@@ -1,0 +1,79 @@
+trigger:
+  branches:
+    include:
+      - master
+      - refs/tags/*
+
+pool:
+  vmImage: "ubuntu-latest"
+
+variables:
+  - group: KubernetesDeployment
+  - name: deploymentName
+    value: image-server
+
+stages:
+  - stage:
+    displayName: Build the Image
+    condition: startsWith(variables['build.sourceBranch'], 'refs/tags/')
+    jobs:
+      - job: ImageBuild
+        steps:
+          # Only persistCredentials when need to commit back
+          - checkout: self
+            persistCredentials: true
+
+          - script: VERSION_TAG=`git describe --tags` && echo "##vso[task.setvariable variable=VERSION_TAG]$VERSION_TAG"
+            displayName: Set the tag name as an environment variable
+
+          - task: Docker@2
+            displayName: Build and push an image to container registry
+            condition: startsWith(variables['build.sourceBranch'], 'refs/tags/')
+            inputs:
+              command: buildAndPush
+              repository: $(imageRepository)
+              dockerfile: Dockerfile
+              containerRegistry: $(registry_connection)
+              tags: |
+                $(VERSION_TAG)
+
+          - task: PublishPipelineArtifact@1
+            inputs:
+              artifactName: "manifests"
+              path: "manifests"
+
+      - job: DeployK8s
+        dependsOn: ImageBuild
+        steps:
+          - checkout: self
+            persistCredentials: true
+
+          - script: VERSION_TAG=`git describe --tags` && echo "##vso[task.setvariable variable=VERSION_TAG]$VERSION_TAG"
+            displayName: Set the tag name as an environment variable
+            
+          - task: DownloadPipelineArtifact@2
+            inputs:
+              artifactName: "manifests"
+              downloadPath: "$(System.ArtifactsDirectory)/manifests"
+
+          - task: KubernetesManifest@0
+            displayName: Create imagePullSecret
+            inputs:
+              action: createSecret
+              secretName: $(imagePullSecret)
+              namespace: image-server
+              dockerRegistryEndpoint: $(registry_connection)
+              kubernetesServiceConnection: k8s_connection
+
+          - task: KubernetesManifest@0
+            displayName: Deploy to Kubernetes cluster
+            inputs:
+              action: deploy
+              namespace: image-server
+              kubernetesServiceConnection: k8s_connection
+              manifests: |
+                $(System.ArtifactsDirectory)/manifests/deployment.yaml
+              imagePullSecrets: |
+                $(imagePullSecret)
+              containers: |
+                $(containerRegistry)/$(imageRepository):$(VERSION_TAG)

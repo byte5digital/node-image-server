@@ -2,12 +2,17 @@ import express from "express"
 import sharp from "sharp"
 import dotenv from "dotenv"
 import fs from "fs"
+import got from "got"
 
 dotenv.config()
 
 export const app = express()
 export async function resizeImageAnMakeWebP(imageFile: string, width: any) {
-	return sharp(`./images/${imageFile}`).webp().resize(width)
+	const sharpStream = sharp()
+	got
+		.stream(`https://imageresizepc.blob.core.windows.net/images/${imageFile}`)
+		.pipe(sharpStream)
+	return sharpStream.pipe(sharpStream).webp().resize(width)
 }
 
 const getWidthForQueryOrGetDefault = (width) => {

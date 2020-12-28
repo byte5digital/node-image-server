@@ -6,13 +6,15 @@
 	"scripts": {
 		"watch": "pm2 install typescript && pm2-dev start pm2-dev.json",
 		"test": "jest",
-		"release": "standard-version --tag-prefix='' && git push --follow-tags origin master"
+		"release": "standard-version --tag-prefix='' && git push --follow-tags origin master",
+		"build": "tsc -p ."
 	},
 	"author": "",
 	"license": "ISC",
 	"dependencies": {
 		"dotenv": "^8.2.0",
 		"express": "^4.17.1",
+		"got": "^11.8.1",
 		"pm2": "^4.5.1",
 		"sharp": "^0.27.0"
 	},

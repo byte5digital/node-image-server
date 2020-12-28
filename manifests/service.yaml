@@ -1,0 +1,19 @@
+
+
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: images-route
+  namespace: default
+spec:
+  entryPoints:
+    - web
+    - websecure
+  routes:
+    - match: Host(`images.pc.hdworks.io`)
+      kind: Rule
+      services:
+        - name: images-port
+          port: 3000
+          scheme: http
+          namespace: image-server
