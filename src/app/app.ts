@@ -3,10 +3,14 @@ import sharp from "sharp"
 import dotenv from "dotenv"
 import fs from "fs"
 import got from "got"
+import cors from "cors"
 
 dotenv.config()
 
 export const app = express()
+app.use(cors())
+app.use(express.static(`./public`))
+
 export async function resizeImageAnMakeWebP(imageFile: string, width: any) {
 	const sharpStream = sharp()
 	got
