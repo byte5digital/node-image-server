@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.5](https://dev.azure.com/byte5-projects/Producer%20Cloud/_git/pc-image-server/branchCompare?baseVersion=GT0.0.4&targetVersion=GT0.0.5) (2020-12-29)
+
+
+### Features
+
+* add fonts to static output ([c9b22b9](https://dev.azure.com/byte5-projects/Producer%20Cloud/_git/pc-image-server/commit/c9b22b90a29f8e057051e9fdd22f446eac6b4e70))
+
+
+### Bug Fixes
+
+* add correct service ([b82017e](https://dev.azure.com/byte5-projects/Producer%20Cloud/_git/pc-image-server/commit/b82017e1dabd3a8a208e8ce00bf0168bf5f64947))
+
 ### [0.0.4](https://dev.azure.com/byte5-projects/Producer%20Cloud/_git/pc-image-server/branchCompare?baseVersion=GT0.0.3&targetVersion=GT0.0.4) (2020-12-28)
 
 
