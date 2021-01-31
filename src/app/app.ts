@@ -1,7 +1,6 @@
 import express from "express"
 import sharp from "sharp"
 import dotenv from "dotenv"
-import fs from "fs"
 import got from "got"
 import cors from "cors"
 
@@ -14,7 +13,13 @@ app.use(express.static(`./public`))
 export async function resizeImageAnMakeWebP(imageFile: string, width: any) {
 	const sharpStream = sharp()
 	got.stream(imageFile).pipe(sharpStream)
-	return sharpStream.pipe(sharpStream).webp().resize(width)
+	return sharpStream
+		.pipe(sharpStream)
+		.webp({
+			lossless: false,
+			quality: 80,
+		})
+		.resize(width)
 }
 
 const getWidthForQueryOrGetDefault = (width) => {
