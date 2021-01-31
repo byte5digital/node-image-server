@@ -1,0 +1,6 @@
+POST http://localhost:3333
+content-type: application/json
+
+{
+	"imageFile": "https://pcloudstorage.blob.core.windows.net/producercloud/assets/_default_upload_bucket/Mainstream_RnB_Vol1_[600x600].jpg"
+}

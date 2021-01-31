@@ -13,9 +13,7 @@ app.use(express.static(`./public`))
 
 export async function resizeImageAnMakeWebP(imageFile: string, width: any) {
 	const sharpStream = sharp()
-	got
-		.stream(`https://imageresizepc.blob.core.windows.net/images/${imageFile}`)
-		.pipe(sharpStream)
+	got.stream(imageFile).pipe(sharpStream)
 	return sharpStream.pipe(sharpStream).webp().resize(width)
 }
 
@@ -32,9 +30,7 @@ const getWidthForQueryOrGetDefault = (width) => {
 app.get("/:imageFile", async (req, res) => {
 	const { imageFile } = req.params
 	let { width } = req.query
-	if (!fs.existsSync(`./images/${imageFile}`)) {
-		return res.status(404).end()
-	}
+	console.log(imageFile)
 	width = getWidthForQueryOrGetDefault(width)
 	const image = await resizeImageAnMakeWebP(
 		imageFile,
