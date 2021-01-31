@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.7](https://dev.azure.com/byte5-projects/Producer%20Cloud/_git/pc-image-server/branchCompare?baseVersion=GT0.0.6&targetVersion=GT0.0.7) (2021-01-31)
+
+
+### Features
+
+* modify output format ([41c6d39](https://dev.azure.com/byte5-projects/Producer%20Cloud/_git/pc-image-server/commit/41c6d39a8c773e8356ca8c4ba5811983cacb9b10))
+
 ### [0.0.6](https://dev.azure.com/byte5-projects/Producer%20Cloud/_git/pc-image-server/branchCompare?baseVersion=GT0.0.5&targetVersion=GT0.0.6) (2021-01-31)
 
 
