@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.6](https://dev.azure.com/byte5-projects/Producer%20Cloud/_git/pc-image-server/branchCompare?baseVersion=GT0.0.5&targetVersion=GT0.0.6) (2021-01-31)
+
+
+### Features
+
+* add global handing for images ([63dc773](https://dev.azure.com/byte5-projects/Producer%20Cloud/_git/pc-image-server/commit/63dc77373529c7ec70082ae98deec0258c98c78f))
+
 ### [0.0.5](https://dev.azure.com/byte5-projects/Producer%20Cloud/_git/pc-image-server/branchCompare?baseVersion=GT0.0.4&targetVersion=GT0.0.5) (2020-12-29)
 
 
