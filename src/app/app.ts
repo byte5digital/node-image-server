@@ -12,7 +12,7 @@ export const app = express()
 app.use(cors())
 app.use(express.static(`./public`))
 
-export async function resizeImageAnMakeWebP(
+export async function resizeImageAnMakePng(
 	imageFile: Stream,
 	width: number,
 	quality = 85,
@@ -24,6 +24,23 @@ export async function resizeImageAnMakeWebP(
 		.pipe(sharpStream)
 		.png({
 			quality,
+		})
+		.resize(width)
+}
+
+export async function resizeImageAnMakeWebP(
+	imageFile: Stream,
+	width: number,
+	quality = 85,
+	lossless = false
+) {
+	const sharpStream = sharp()
+	imageFile.pipe(sharpStream)
+	return sharpStream
+		.pipe(sharpStream)
+		.webp({
+			quality,
+			lossless,
 		})
 		.resize(width)
 }
@@ -79,18 +96,25 @@ app.get("/local", async (req, res) => {
 	res.status(200).send()
 })
 
-app.get("/:imageFile/:lossless?", async (req, res) => {
-	const { imageFile, lossless } = req.params
+app.get("/:imageFile/:lossless/:format/:width", async (req, res) => {
+	const { imageFile, lossless, format, width } = req.params
 	const isLossless = lossless === "true" ?? false
-	let { width } = req.query
 	console.log(imageFile)
-	width = getWidthForQueryOrGetDefault(width)
-	const image = await resizeImageAnMakeWebP(
+	const finalWidth = getWidthForQueryOrGetDefault(width)
+	if (format === "webp") {
+		const image = await resizeImageAnMakeWebP(
+			got.stream(imageFile),
+			Number.parseInt(finalWidth.toString(), 10),
+			80,
+			isLossless
+		)
+		return image.pipe(res).status(200)
+	}
+	const image = await resizeImageAnMakePng(
 		got.stream(imageFile),
-		Number.parseInt(width.toString(), 10),
+		Number.parseInt(finalWidth.toString(), 10),
 		80,
 		isLossless
 	)
-
 	return image.pipe(res).status(200)
 })
