@@ -4,10 +4,12 @@
 	"description": "Image Server to process images for new web formats",
 	"main": "src/index.ts",
 	"scripts": {
+		"start": "node --inspect=5858 -r ts-node/register ./src/index.ts",
 		"watch": "pm2 install typescript && pm2-dev start pm2-dev.json",
 		"test": "jest",
 		"release": "standard-version --tag-prefix='' && git push --follow-tags origin master",
-		"build": "tsc -p ."
+		"build": "tsc -p .",
+		"nodemon": "nodemon"
 	},
 	"author": "",
 	"license": "ISC",

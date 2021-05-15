@@ -1,5 +1,4 @@
 FROM node:14
-
 RUN npm install pm2 -g
 
 WORKDIR /app
@@ -12,6 +11,6 @@ COPY . .
 
 RUN npm run build
 
-EXPOSE 3000
+EXPOSE 3333
 
-CMD ["pm2-runtime", "dist/index.js"]
+CMD ["pm2-runtime", "dist/index.js", "-i", "max"]
