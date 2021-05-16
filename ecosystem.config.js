@@ -7,8 +7,8 @@ module.exports = {
 		{
 			name: "image-server",
 			script: "dist/index.js",
-			instances: 10,
-			exec_mode: "fork",
+			instances: 5,
+			exec_mode: "cluster",
 			watch: true,
 			autorestart: true,
 		},
